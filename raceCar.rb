@@ -151,3 +151,17 @@ b = RaceCar.new("adfasf", "adfasdf");
 c = RaceCar.new("bob", "Marley");
 d = RaceCar.new("hello", "dude")
 
+
+load "raceCar.rb";
+a = RaceCar.new("a", "sdfad");
+b = RaceCar.new("adfasf", "adfasdf");
+c = RaceCar.new("bob", "Marley");
+d = RaceCar.new("hello", "dude");
+n = RaceTrack.new;
+n.add_car(a);
+n.add_car(b);
+n.add_car(c);
+n.add_car(d);
+n.start_race
+
+
