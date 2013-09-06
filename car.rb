@@ -16,7 +16,9 @@ class Car
       @fuel -= miles/20.0
       @distance += miles
     else
-      puts "You don't have enough gas! Fill up boy!"
+      @distance = @fuel * 20
+      @fuel = 0
+      puts "You drove #{@fuel * 20} miles and then ran out of gas... Fill er it up!"
     end
   end
 
