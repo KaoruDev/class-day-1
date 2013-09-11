@@ -14,7 +14,7 @@ class RaceTrack
       {
         :name => car.name,
         :sponsor => car.sponsor,
-        :speed => rand(21) + 60,
+        :speed => car.speed,
         :distance => 0,
         :odds => 1.0
       })
@@ -47,12 +47,13 @@ class RaceTrack
 
   def det_odds
     rank = @cars.length
-    @cars.sort { |x, y| x[:distance] <=> y[:distance]}
+    @cars.sort! { |x, y| x[:distance] + x[:speed] <=> y[:distance] + y[:speed]}
     @cars.each{ |car|
     car[:odds] = (rank / @cars.length.to_f * (5 - @hours).round(2)) + 1
        
-    puts %<
-      Bets on #{car[:name]} has a #{car[:odds]} return!>
+    puts %`
+      Bets on {car[:name]}**** have a #{car[:odds]} return!
+      `
     rank -= 1
     }
   end
@@ -88,7 +89,7 @@ class RaceTrack
       car[:speed] += rand(21)
       print %<
       #{car[:name]} flies through #{car[:distance]} miles!
-      The #{car[:sponsor]} car is going #{car[:speed]} mph!!
+      The #{car[:sponsor]} car is now going #{car[:speed]} mph!!
       >
     }
     @hours += 1
@@ -105,8 +106,8 @@ class RaceTrack
     }
     puts %<
     The winner is.....#{winner[:name]}, sponsored by #{winner[:sponsor]}!!!!!!!
-    puts #{winner[:name]} drove an amazing #{winner[:distance]} miles in 5 hours!
-    An average speed of #{winner[:distance] / 5}.
+    winner[:name]} drove an amazing #{winner[:distance]} miles in 5 hours!
+    An average speed of #{winner[:distance] / 5}mph.
 
     Add cars to race again!
     >
@@ -125,43 +126,14 @@ class RaceTrack
 end # End of class
 
 class RaceCar
+  attr_reader :name, :sponsor, :speed
+  attr_accessor :distance, :odds
+
+
   def initialize(name, sponsor)
-    @name = name
+    @name = name.capitalize
     @sponsor = sponsor
     @speed = rand(21) + 60
   end
-
-  def name
-    @name
-  end
-
-  def sponsor
-    @sponsor
-  end
-
-  def speed
-    @speed
-  end
 end
-
-n = RaceTrack.new
-
-a = RaceCar.new("a", "sdfad");
-b = RaceCar.new("adfasf", "adfasdf");
-c = RaceCar.new("bob", "Marley");
-d = RaceCar.new("hello", "dude")
-
-
-load "raceCar.rb";
-a = RaceCar.new("a", "sdfad");
-b = RaceCar.new("adfasf", "adfasdf");
-c = RaceCar.new("bob", "Marley");
-d = RaceCar.new("hello", "dude");
-n = RaceTrack.new;
-n.add_car(a);
-n.add_car(b);
-n.add_car(c);
-n.add_car(d);
-n.start_race
-
 

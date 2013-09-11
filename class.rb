@@ -10,3 +10,17 @@
 "MakerSquare".*(6)
 "MakerSquare".split("a")
 ["alpha", "beta"].[](3) #deletes 3 indexies. => nil 
+
+class Car
+  @pos = 0
+  @gas = 10
+
+  def drive(miles)
+    @gas -= miles
+    @pos += miles
+  end
+
+  def fill_up(gallons)
+    @gas += gallons
+  end
+end
